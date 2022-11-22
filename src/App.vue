@@ -5,7 +5,13 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    // Axios('itcast/nc/article/headline/T1348647853363/0-40.html').then((data) => {
+    //   console.log(data)
+    // })
+  },
 }
 </script>
