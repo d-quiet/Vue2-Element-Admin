@@ -105,7 +105,7 @@ export default {
         if (isOK) {
           try {
             this.loading = true
-            await this['user/login'](this.login)
+            await this['user/login'](this.loginForm)
             this.$router.push('/')
           } catch (error) {
             console.log(error)
