@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let arr = [1, 2, 3, [4, 5, [7, 8, [9, 10]]]]
+        // console.log(arr)
+        // const recursion = (arr) => {
+        //     arr.forEach(item => {
+        //         if (item instanceof Array) {
+        //             recursion(item)
+        //         }
+        //         console.log(item)
+        //     });
+        // }
+        // recursion(arr)
+
+
+        // const obj = {
+        //     id: 1,
+        //     name: "部门1",
+        //     pid: 0,
+        //     children: [
+        //         {
+        //             id: 2,
+        //             name: "部门2",
+        //             pid: 1,
+        //             children: [],
+        //         },
+        //         {
+        //             id: 6,
+        //             name: "部门6",
+        //             pid: 1,
+        //             children: [],
+        //         },
+        //         {
+        //             id: 3,
+        //             name: "部门3",
+        //             pid: 1,
+        //             children: [
+        //                 {
+        //                     id: 4,
+        //                     name: "部门4",
+        //                     pid: 3,
+        //                     children: [
+        //                         {
+        //                             id: 5,
+        //                             name: "部门5",
+        //                             pid: 4,
+        //                             children: [],
+        //                         },
+        //                     ],
+        //                 },
+        //             ],
+        //         },
+        //     ],
+        // };
+
+        // function treeToList(tree, result = []) {
+        //     result.push(tree)
+        //     tree.children.forEach(item => {
+        //         treeToList(item, result)
+        //     });
+        //     return result;
+        // }
+        // console.log(treeToList(obj))
+
+        // const arr1 = [
+        //     { id: 1, name: "部门1", pid: 0 }, // 根节点
+        //     { id: 2, name: "部门2", pid: 1 },
+        //     { id: 3, name: "部门3", pid: 1 },
+        //     { id: 4, name: "部门4", pid: 3 },
+        //     { id: 5, name: "部门5", pid: 4 },
+        // ];
+        // function listToTree(list, rootValue) {
+        //     let result = [];
+        //     list.forEach(item => {
+        //         if (item.pid === rootValue) {
+        //             let children = []
+        //             children = listToTree(list, item.id)
+        //             item.children = children
+        //             result.push(item)
+        //         }
+        //     })
+        //     return result
+        // }
+        // console.log(treeToList(arr1))
+
+        // 闭包
+        function fn() {
+            const a = 1
+            return function () {
+                console.log(a)
+            }
+        }
+        fn()()
+
+        for (var i = 0; i < 5; i++) {
+            ((j) => {
+                setTimeout(() => {
+                    console.log(j)
+                });
+            })(i)
+        }
+    </script>
+</body>
+
+</html>

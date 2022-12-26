@@ -33,14 +33,21 @@
         <span style="margin-right:20px;">账号: 13800000002</span>
         <span> 密码: 123456</span>
       </div>
-
+      <div>
+        <img :src="url" @click="getCaptcha">
+      </div>
+      <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview"
+        :on-remove="handleRemove" :before-remove="beforeRemove" multiple :limit="3" :on-exceed="handleExceed"
+        :file-list="fileList">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
     </el-form>
   </div>
 </template>
 
 <script>
 import { validMobile } from '@/utils/validate'
-import { async } from 'q'
 import { mapActions } from 'vuex'  // 引入vuex的辅助函数
 export default {
   name: 'Login',
@@ -60,6 +67,9 @@ export default {
     //   }
     // }
     return {
+      fileList: [{ name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }],
+      url: 'http://demo.open.renren.io/renren-security-server/captcha',
+      uuid: '',
       loginForm: {
         mobile: '13800000002',
         password: '123456'
@@ -79,15 +89,39 @@ export default {
       redirect: undefined
     }
   },
+  mounted() { this.uuid = this.getUUID() },
   watch: {
     $route: {
       handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
+    },
+    uuid() {
+      this.url = `http://demo.open.renren.io/renren-security-server/captcha?uuid=${this.uuid}`
     }
   },
   methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    getCaptcha() {
+      this.uuid = this.getUUID()
+    },
+    getUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
+      })
+    },
     ...mapActions(['user/login']),
     showPwd() {
       if (this.passwordType === 'password') {

@@ -16,6 +16,22 @@ import '@/icons' // icon
 import '@/permission' // permission control
 
 import * as directives from '@/directives'
+// 自己定义的插件
+import myPlugin from './Plugin'
+// 全局引用假的饿了么组件
+import elTest from './elTest.vue'
+import Print from 'vue-print-nb'
+// 注册全局组件
+import Components from '@/components'
+import * as filters from '@/filters' // 引入工具类
+// 注册全局的过滤器
+Object.keys(filters).forEach(key => {
+  // 注册过滤器
+  Vue.filter(key, filters[key])
+})
+Vue.use(Print);
+Vue.use(Components)
+
 // 注册自定义指令
 // 遍历所有的导出的指令对象 完成自定义全局注册
 console.log(directives)
@@ -24,7 +40,9 @@ Object.keys(directives).forEach(key => {
   Vue.directive(key, directives[key])
 })
 
-
+Vue.component('elTest', elTest)
+Vue.use(myPlugin)
+Vue.fn()
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Point {
+            // 成员属性
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            // 成员方法
+            toString() {
+                console.log(this)
+                return "(" + this.x + ',' + this.y + ")";
+            }
+
+            // 类的静态方法，类可以调用
+            static str() {
+                console.log('我是静态方法！')
+            }
+        }
+
+        const p = new Point(1, 2);
+        const a = p.toString()
+        console.log(a)
+        Point.str()
+        p.str()
+    </script>
+</body>
+
+</html>

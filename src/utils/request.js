@@ -4,7 +4,7 @@ import { Message } from "element-ui";
 import { getTimeStamp } from '@/utils/auth'
 import router from "@/router";
 
-const TimeOut = 10 // 定义超时时间
+const TimeOut = 6000 // 定义超时时间
 function isCheck() {
   const currentTime = Date.now()
   const time = getTimeStamp()
